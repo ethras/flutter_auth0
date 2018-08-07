@@ -36,3 +36,5 @@ captures/
 \.packages
 
 example/android/app/src/main/res/values/strings\.xml
+
+example/ios/Runner/Auth0\.plist

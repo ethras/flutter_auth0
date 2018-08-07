@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter/services.dart';
-import 'package:auth0/auth0.dart';
+import 'package:flutter_auth0/auth0.dart';
 
 void main() => runApp(new MyApp());
 

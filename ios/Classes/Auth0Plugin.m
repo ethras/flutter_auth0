@@ -1,5 +1,5 @@
 #import "Auth0Plugin.h"
-#import <auth0/auth0-Swift.h>
+#import <flutter_auth0/flutter_auth0-Swift.h>
 
 @implementation Auth0Plugin
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {

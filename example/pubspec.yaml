@@ -13,7 +13,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  auth0:
+  flutter_auth0:
     path: ../
 
 # For information on the generic Dart part of this file, see the
