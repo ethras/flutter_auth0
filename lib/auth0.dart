@@ -16,4 +16,9 @@ class Auth0 {
     final res = await _channel.invokeMethod("getToken");
     return res;
   }
+  
+  static Future<bool> get isLoggedIn async {
+    final res = await _channel.invokeMethod("isLoggedIn");
+    return res;
+  }
 }

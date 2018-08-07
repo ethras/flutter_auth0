@@ -59,6 +59,9 @@ class Auth0Plugin(private val registrar: Registrar) : MethodCallHandler {
                     result.error("No credentials", "Check if logged in", null)
                 }
             }
+            "isLoggedIn" -> {
+                result.success(isLoggedIn)
+            }
             else -> result.notImplemented()
         }
     }
