@@ -41,7 +41,7 @@ class Auth0Plugin(private val registrar: Registrar) : MethodCallHandler {
         when (call.method) {
             "login" -> {
                 val audience = call.argument<String>("audience") ?: ""
-                login(audience)
+                login(audience, result)
             }
             "getToken" -> {
                 if (isLoggedIn) {
@@ -63,7 +63,7 @@ class Auth0Plugin(private val registrar: Registrar) : MethodCallHandler {
         }
     }
 
-    private fun login(audience: String) {
+    private fun login(audience: String, result: Result) {
         WebAuthProvider.init(account).apply {
             if (audience.isNotEmpty()) {
                 withAudience(audience)
@@ -75,14 +75,17 @@ class Auth0Plugin(private val registrar: Registrar) : MethodCallHandler {
                         println("Connecté")
                         manager.saveCredentials(credentials)
                         println(credentials)
+                        result.success(true)
                     }
 
                     override fun onFailure(dialog: Dialog) {
                         println("Echec")
+                        result.success(false)
                     }
 
                     override fun onFailure(exception: AuthenticationException?) {
                         println("Echec ${exception?.description}")
+                        result.success(false)
                     }
 
                 })
