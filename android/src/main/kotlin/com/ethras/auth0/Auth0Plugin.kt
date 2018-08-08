@@ -43,6 +43,10 @@ class Auth0Plugin(private val registrar: Registrar) : MethodCallHandler {
                 val audience = call.argument<String>("audience") ?: ""
                 login(audience, result)
             }
+            "logout" -> {
+                manager.clearCredentials()
+                result.success(true)
+            }
             "getToken" -> {
                 if (isLoggedIn) {
                     manager.getCredentials(object : BaseCallback<Credentials, CredentialsManagerException?> {

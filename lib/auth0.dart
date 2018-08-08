@@ -12,11 +12,16 @@ class Auth0 {
     return res;
   }
 
+  static Future<bool> logout() async {
+    final res = await _channel.invokeMethod('logout');
+    return res;
+  }
+
   static Future<String> get accessToken async {
     final res = await _channel.invokeMethod("getToken");
     return res;
   }
-  
+
   static Future<bool> get isLoggedIn async {
     final res = await _channel.invokeMethod("isLoggedIn");
     return res;
