@@ -8,7 +8,7 @@ PODS:
   - SimpleKeychain (0.8.1)
 
 DEPENDENCIES:
-  - Flutter (from `.symlinks/flutter/ios-release`)
+  - Flutter (from `.symlinks/flutter/ios`)
   - flutter_auth0 (from `.symlinks/plugins/flutter_auth0/ios`)
 
 SPEC REPOS:
@@ -18,7 +18,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Flutter:
-    :path: ".symlinks/flutter/ios-release"
+    :path: ".symlinks/flutter/ios"
   flutter_auth0:
     :path: ".symlinks/plugins/flutter_auth0/ios"
 
