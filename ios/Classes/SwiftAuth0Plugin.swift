@@ -27,6 +27,10 @@ public class SwiftAuth0Plugin: NSObject, FlutterPlugin {
         case "isLoggedIn":
             result(getIsLoggedIn())
             break
+        case "logout":
+            credentialsManager.clear()
+            result(true)
+            break
         default:
             result(FlutterMethodNotImplemented)
             break
