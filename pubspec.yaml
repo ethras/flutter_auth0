@@ -5,8 +5,6 @@ author:
 homepage:
 
 dependencies:
-  dart_jwt:
-    git: https://bitbucket.org/aholmgren/dart_jwt.git
   flutter:
     sdk: flutter
 
