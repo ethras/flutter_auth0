@@ -19,7 +19,7 @@ public class SwiftAuth0Plugin: NSObject, FlutterPlugin {
         switch(method) {
         case "login":
             let audience = dic!["audience"] as! String
-            login(audience: audience)
+            login(audience: audience, result: result)
             break
         case "getToken":
             getAccessToken(result: result)
@@ -54,18 +54,20 @@ public class SwiftAuth0Plugin: NSObject, FlutterPlugin {
     }
     
     // Login with audience
-    private func login(audience: String) {
+    private func login(audience: String, result: @escaping FlutterResult) {
         Auth0.webAuth()
             .scope("openid profile offline_access")
             .audience(audience)
-            .start { result in
-                switch result {
+            .start { res in
+                switch res {
                 case .success(let credentials):
                     self.credentialsManager.store(credentials: credentials)
                     print("Auth0: connected")
+                    result(true)
                     break
                 case .failure(let error):
                     print(error)
+                    result(false)
                     break
                 }
         }
