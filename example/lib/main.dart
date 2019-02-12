@@ -43,6 +43,17 @@ class _MyAppState extends State<MyApp> {
             ),
             new RaisedButton(
               child: new Text(
+                "Log out",
+                style: new TextStyle(fontSize: 18.0),
+              ),
+              onPressed: () {
+                Auth0.logout();
+              },
+              color: Colors.blue,
+              textColor: Colors.white,
+            ),
+            new RaisedButton(
+              child: new Text(
                 "Get access token",
                 style: new TextStyle(fontSize: 18.0),
               ),

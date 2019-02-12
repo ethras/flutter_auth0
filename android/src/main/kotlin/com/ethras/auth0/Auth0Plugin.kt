@@ -41,7 +41,8 @@ class Auth0Plugin(private val registrar: Registrar) : MethodCallHandler {
         when (call.method) {
             "login" -> {
                 val audience = call.argument<String>("audience") ?: ""
-                login(audience, result)
+                val scheme = call.argument<String>("scheme")?: "https"
+                login(audience, scheme, result)
             }
             "logout" -> {
                 manager.clearCredentials()
@@ -70,12 +71,13 @@ class Auth0Plugin(private val registrar: Registrar) : MethodCallHandler {
         }
     }
 
-    private fun login(audience: String, result: Result) {
+    private fun login(audience: String, scheme: String, result: Result) {
         WebAuthProvider.init(account).apply {
             if (audience.isNotEmpty()) {
                 withAudience(audience)
             }
         }
+                .withScheme(scheme)
                 .withScope("openid offline_access")
                 .start(registrar.activity(), object : AuthCallback {
                     override fun onSuccess(credentials: Credentials) {
