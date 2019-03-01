@@ -21,8 +21,12 @@ class Auth0 {
   }
 
   static Future<String> get accessToken async {
-    final res = await _channel.invokeMethod("getToken");
-    return res;
+    try {
+      final res = await _channel.invokeMethod("getToken");
+      return res;
+    } on PlatformException catch (e) {
+      return null;
+    }
   }
 
   static Future<bool> get isLoggedIn async {
