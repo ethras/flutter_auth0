@@ -45,7 +45,9 @@ public class SwiftAuth0Plugin: NSObject, FlutterPlugin {
     private func getAccessToken(result: @escaping FlutterResult) {
         credentialsManager.credentials { error, credentials in
             guard error == nil, let credentials = credentials else {
-                result(error)
+                let message = error?.localizedDescription ?? ""
+                print("Error getting accessToken : " + message )
+                result(FlutterError(code: "ACCES_TOKEN_ERROR", message: message, details: nil))
                 return
             }
             // Valid credentials, you can access the token properties such as `idToken`, `accessToken`.
