@@ -41,7 +41,7 @@ class Auth0Plugin(private val registrar: Registrar) : MethodCallHandler {
         when (call.method) {
             "login" -> {
                 val audience = call.argument<String>("audience") ?: ""
-                val scheme = call.argument<String>("scheme")?: "https"
+                val scheme = call.argument<String>("scheme") ?: "https"
                 login(audience, scheme, result)
             }
             "logout" -> {
@@ -57,7 +57,7 @@ class Auth0Plugin(private val registrar: Registrar) : MethodCallHandler {
                         }
 
                         override fun onFailure(error: CredentialsManagerException?) {
-                            result.error("Error getting credentials", null, error)
+                            result.error("Error getting credentials", error.toString(), null)
                         }
                     })
                 } else {
