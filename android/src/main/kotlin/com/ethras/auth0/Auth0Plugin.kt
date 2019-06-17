@@ -53,15 +53,21 @@ class Auth0Plugin(private val registrar: Registrar) : MethodCallHandler {
                     manager.getCredentials(object : BaseCallback<Credentials, CredentialsManagerException?> {
                         override fun onSuccess(payload: Credentials) {
                             manager.saveCredentials(payload)
-                            result.success(payload.accessToken)
+                            registrar.activity().runOnUiThread {
+                                result.success(payload.accessToken)
+                            }
                         }
 
                         override fun onFailure(error: CredentialsManagerException?) {
-                            result.error("Error getting credentials", error.toString(), null)
+                            registrar.activity().runOnUiThread {
+                                result.error("Error getting credentials", error.toString(), null)
+                            }
                         }
                     })
                 } else {
-                    result.error("No credentials", "Check if logged in", null)
+                    registrar.activity().runOnUiThread {
+                        result.error("No credentials", "Check if logged in", null)
+                    }
                 }
             }
             "isLoggedIn" -> {
@@ -84,19 +90,24 @@ class Auth0Plugin(private val registrar: Registrar) : MethodCallHandler {
                         println("Connecté")
                         manager.saveCredentials(credentials)
                         println(credentials)
-                        result.success(true)
+                        registrar.activity().runOnUiThread {
+                            result.success(true)
+                        }
                     }
 
                     override fun onFailure(dialog: Dialog) {
                         println("Echec")
-                        result.success(false)
+                        registrar.activity().runOnUiThread {
+                            result.success(false)
+                        }
                     }
 
                     override fun onFailure(exception: AuthenticationException?) {
                         println("Echec ${exception?.description}")
-                        result.success(false)
+                        registrar.activity().runOnUiThread {
+                            result.success(false)
+                        }
                     }
-
                 })
     }
 }
