@@ -52,10 +52,14 @@ class _MyAppState extends State<MyApp> {
               color: Colors.blue,
               textColor: Colors.white,
             ),
-            new RaisedButton(
-              child: new Text(
+            RaisedButton(
+              onPressed: getProfile,
+              child: Text("Get profile"),
+            ),
+            RaisedButton(
+              child: Text(
                 "Get access token",
-                style: new TextStyle(fontSize: 18.0),
+                style: TextStyle(fontSize: 18.0),
               ),
               onPressed: () async {
                 print(await Auth0.accessToken);
@@ -67,5 +71,11 @@ class _MyAppState extends State<MyApp> {
         )),
       ),
     );
+  }
+
+  void getProfile() async {
+    final profile =
+        await Auth0.getUserInfo();
+    print(profile);
   }
 }

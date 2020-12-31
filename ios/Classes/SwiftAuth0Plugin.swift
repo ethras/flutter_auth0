@@ -27,6 +27,10 @@ public class SwiftAuth0Plugin: NSObject, FlutterPlugin {
         case "isLoggedIn":
             result(getIsLoggedIn())
             break
+        case "userInfo":
+            let accessToken = dic!["accessToken"] as! String
+            getUserInfo(accessToken: accessToken, flutterResult: result)
+            break
         case "logout":
             credentialsManager.clear()
             result(true)
@@ -36,6 +40,19 @@ public class SwiftAuth0Plugin: NSObject, FlutterPlugin {
             break
         }
         
+    }
+    
+    private func getUserInfo(accessToken: String, flutterResult: @escaping FlutterResult) {
+        Auth0.authentication().userInfo(withAccessToken: accessToken)
+            .start{result in
+                switch result {
+                case .success(let profile):
+                    flutterResult(["sub": profile.sub, "email": profile.email])
+                    break
+                case .failure(let error):
+                    flutterResult(FlutterError(code: "USER_INFO_ERROR", message: error.localizedDescription, details: nil))
+                    break
+                }}
     }
     
     private func getIsLoggedIn() -> Bool {
@@ -58,7 +75,7 @@ public class SwiftAuth0Plugin: NSObject, FlutterPlugin {
     // Login with audience
     private func login(audience: String, result: @escaping FlutterResult) {
         Auth0.webAuth()
-            .scope("openid profile offline_access")
+            .scope("openid profile offline_access email")
             .audience(audience)
             .start { res in
                 switch res {

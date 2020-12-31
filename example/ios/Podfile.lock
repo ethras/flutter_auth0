@@ -8,26 +8,26 @@ PODS:
   - SimpleKeychain (0.8.1)
 
 DEPENDENCIES:
-  - Flutter (from `.symlinks/flutter/ios-release`)
+  - Flutter (from `Flutter`)
   - flutter_auth0 (from `.symlinks/plugins/flutter_auth0/ios`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - Auth0
     - SimpleKeychain
 
 EXTERNAL SOURCES:
   Flutter:
-    :path: ".symlinks/flutter/ios-release"
+    :path: Flutter
   flutter_auth0:
     :path: ".symlinks/plugins/flutter_auth0/ios"
 
 SPEC CHECKSUMS:
   Auth0: 7e99e1ca69543bc243d9687fd612057072f3eaaf
-  Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   flutter_auth0: 43698a8384f27adac547223055b64d264a1957a1
   SimpleKeychain: e2485c28d82fcece35e9e41faeac42ebfe614815
 
-PODFILE CHECKSUM: a1fff3dbccd6af81b093f91d7b1e5c5272d22b40
+PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c
 
-COCOAPODS: 1.6.0
+COCOAPODS: 1.10.0

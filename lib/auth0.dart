@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:flutter_auth0/user_info.dart';
 
 class Auth0 {
   static const MethodChannel _channel = const MethodChannel('auth0');
@@ -13,6 +14,14 @@ class Auth0 {
     };
     final res = await _channel.invokeMethod('login', params);
     return res;
+  }
+
+  static Future<UserInfo> getUserInfo({String accessToken}) async {
+    accessToken = accessToken ?? await Auth0.accessToken;
+    final Map<String, dynamic> params = {'accessToken': accessToken};
+    final res = Map<String, dynamic>.from(
+        await _channel.invokeMethod('userInfo', params));
+    return UserInfo(sub: res['sub'], email: res['email']);
   }
 
   static Future<bool> logout() async {
