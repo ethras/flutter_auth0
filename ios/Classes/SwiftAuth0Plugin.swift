@@ -69,7 +69,6 @@ public class SwiftAuth0Plugin: NSObject, FlutterPlugin {
                 return
             }
             // Valid credentials, you can access the token properties such as `idToken`, `accessToken`.
-            print("Token " + credentials.accessToken)
             result(credentials.accessToken)
         }
     }
