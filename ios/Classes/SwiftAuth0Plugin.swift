@@ -47,7 +47,8 @@ public class SwiftAuth0Plugin: NSObject, FlutterPlugin {
             .start{result in
                 switch result {
                 case .success(let profile):
-                    flutterResult(["sub": profile.sub, "email": profile.email])
+                    let dic: [String : String?] = ["sub": profile.sub, "email": profile.email]
+                    flutterResult(dic)
                     break
                 case .failure(let error):
                     flutterResult(FlutterError(code: "USER_INFO_ERROR", message: error.localizedDescription, details: nil))
