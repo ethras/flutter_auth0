@@ -18,6 +18,9 @@ class Auth0 {
 
   static Future<UserInfo> getUserInfo({String accessToken}) async {
     accessToken = accessToken ?? await Auth0.accessToken;
+    if (accessToken.isEmpty) {
+      return null;
+    }
     final Map<String, dynamic> params = {'accessToken': accessToken};
     final res = Map<String, dynamic>.from(
         await _channel.invokeMethod('userInfo', params));
