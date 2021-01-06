@@ -18,7 +18,7 @@ class Auth0 {
 
   static Future<UserInfo> getUserInfo({String accessToken}) async {
     accessToken = accessToken ?? await Auth0.accessToken;
-    if (accessToken.isEmpty) {
+    if (accessToken == null || accessToken.isEmpty) {
       return null;
     }
     final Map<String, dynamic> params = {'accessToken': accessToken};
